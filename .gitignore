@@ -1,0 +1,27 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local outputs
+build/
+dist/
+*.wechat.html
+*.body.html
+*.submitted.body.html
+*.draft.json
+*.image-uploads.json
+image-plan.md
+cover.png
+cover.jpg
+
+# Secrets and local config
+.env
+.env.*
+config.yaml
+md2wechat.config.yaml
+*.secret
+*.token
+
+# Editor files
+.idea/
+.vscode/

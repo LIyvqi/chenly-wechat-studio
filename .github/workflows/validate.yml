@@ -1,0 +1,55 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate skill metadata
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          skill_dir = Path("skills/chenly-wechat-studio")
+          skill = skill_dir / "SKILL.md"
+          text = skill.read_text(encoding="utf-8")
+          if not text.startswith("---\n"):
+              raise SystemExit("SKILL.md must start with YAML frontmatter")
+          end = text.find("\n---", 4)
+          if end == -1:
+              raise SystemExit("SKILL.md frontmatter is not closed")
+          meta = {}
+          for line in text[4:end].strip().splitlines():
+              if ":" in line:
+                  key, value = line.split(":", 1)
+                  meta[key.strip()] = value.strip().strip('"').strip("'")
+          if meta.get("name") != skill_dir.name:
+              raise SystemExit(f"name must match folder: {meta.get('name')} != {skill_dir.name}")
+          if not meta.get("description"):
+              raise SystemExit("description is required")
+          print("Skill metadata OK")
+          PY
+
+      - name: Compile Python scripts
+        run: |
+          python -m py_compile skills/chenly-wechat-studio/scripts/*.py
+
+      - name: Check obvious secret patterns
+        run: |
+          if grep -R -nE '(wx[0-9a-fA-F]{16}|appsecret|WECHAT_SECRET=|MD2WECHAT_API_KEY=)' . \
+            --exclude-dir=.git \
+            --exclude=README.md \
+            --exclude=SKILL.md \
+            --exclude=validate.yml; then
+            echo "Potential secret pattern found"
+            exit 1
+          fi
