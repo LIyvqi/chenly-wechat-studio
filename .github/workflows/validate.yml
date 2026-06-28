@@ -49,7 +49,8 @@ jobs:
             --exclude-dir=.git \
             --exclude=README.md \
             --exclude=SKILL.md \
-            --exclude=validate.yml; then
+            --exclude=validate.yml \
+            --exclude='*.png'; then
             echo "Potential secret pattern found"
             exit 1
           fi
