@@ -1,4 +1,4 @@
 interface:
   display_name: "宸旅公众号工坊"
-  short_description: "Create adaptive WeChat drafts for Chenly"
-  default_prompt: "Use $chenly-wechat-studio to turn my Markdown into an aesthetically matched WeChat draft with a generated cover."
+  short_description: "Turn ideas or Markdown into polished WeChat drafts for Chenly"
+  default_prompt: "Use $chenly-wechat-studio to turn my idea or Markdown into a polished WeChat article with adaptive layout and a cover direction."

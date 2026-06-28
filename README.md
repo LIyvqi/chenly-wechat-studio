@@ -1,8 +1,10 @@
 # Chenly WeChat Studio
 
-![Chenly WeChat Studio](docs/images/hero-anime.png)
+![Chenly WeChat Studio](docs/images/hero-handdrawn.png)
 
-`chenly-wechat-studio` 是一个 Codex Skill：把 Markdown 做成公众号草稿。
+`chenly-wechat-studio` 是一个 Codex Skill：把想法、口述素材或 Markdown 做成公众号草稿。
+
+它不只是一个 Markdown 转换器。更常见的用法是：你先用自然语言告诉 Codex 想写什么、给谁看、希望读者有什么感受或行动，Codex 再帮你完成文章结构、正文实现、视觉方向、配图规划和适合微信公众号阅读的排版。
 
 它做三件事：
 
@@ -117,6 +119,8 @@ export WECHAT_SECRET="your_appsecret"
 ## 示例
 
 看 [examples/article.md](examples/article.md)。它是一篇可以直接渲染的中文示例。
+
+更多从“松散想法/口述内容”开始的协作方式，见 [skills/chenly-wechat-studio/examples/README.md](skills/chenly-wechat-studio/examples/README.md)。
 
 ## License
 

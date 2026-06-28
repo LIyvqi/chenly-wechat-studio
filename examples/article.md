@@ -10,7 +10,7 @@ visual_direction: clear-engineering
 
 这篇示例只讲一件事：怎么具体使用 `chenly-wechat-studio`。
 
-![使用流程示意](assets/workflow-anime.png)
+![使用流程示意](assets/workflow-handdrawn.png)
 
 ## 第 1 步：写好 Markdown
 
