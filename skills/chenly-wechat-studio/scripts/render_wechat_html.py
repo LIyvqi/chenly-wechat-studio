@@ -208,6 +208,8 @@ SCENE_THEME_MAP = {
     "深度分析": "magazine-editorial",
     "report": "magazine-editorial",
     "strategy": "magazine-editorial",
+    "tool-roundup": "magazine-editorial",
+    "工具盘点": "magazine-editorial",
     "news": "newspaper-press",
     "新闻": "newspaper-press",
     "热点": "newspaper-press",

@@ -32,12 +32,29 @@ Optimize the article body, not the local preview shell.
 2. Keep the original Markdown read-only unless the user asks to edit it.
 3. For substantial work, create a small working folder with `source.md`, optional `plan.md`, `review.md`, and `build/` outputs.
 4. Classify the article before styling: article type, target reader, business goal, visual direction, layout modules, cover direction.
-5. If images matter, read `references/image-playbook.md` and create an image plan: source strategy, cover prompt, body-image prompts, target file names, and article placement.
+5. If images matter, read `references/image-playbook.md`. For user-supplied image sets, use the fast path below; for sourced or generated images, create an image plan with source strategy, prompts, target file names, and article placement.
 6. If the article needs improvement, create a temporary or sibling Markdown draft with Codex-authored edits and only add visual modules that clarify the content.
 7. If the user needs a cover and no cover is supplied, use Codex's built-in `image_gen` capability to generate a 16:9 raster cover, save it beside the article as `cover.png`, and keep the prompt in the working folder.
 8. Render the final Markdown with `scripts/render_wechat_html.py`; prefer `--theme auto` unless the user names a specific direction.
 9. For publishable drafts, review the submitted body HTML, not only the full preview page: title length, digest length, cover present, theme fit, opening rhythm, body image URLs, raw newline count, empty paragraphs, and WeChat credentials/IP readiness.
 10. Return the cover path, output HTML path, selected theme, inferred article type, image plan/generated image paths, and a short note about any limitations.
+
+## Self-Evolution And Repo Sync
+
+Treat the installed skill at `~/.codex/skills/chenly-wechat-studio` as the working copy used in real publishing. When this installed skill is improved during actual use, mirror the same skill files back to the source repository at `chenly-wechat-studio/skills/chenly-wechat-studio` before considering the improvement done.
+
+Do not sync or commit account secrets, tokens, uploaded media IDs, draft payloads, local `.env` files, or private WeChat configuration. Documentation may mention credential requirements generically, but real `WECHAT_APPID`, `WECHAT_SECRET`, access tokens, draft JSON, and image upload records must stay out of the repository.
+
+## Fast Path for Supplied Images
+
+Use this when the user already attached screenshots/photos/final posters and asks to create or push a draft quickly.
+
+1. Treat user-provided images as the source of truth. Do not browse for replacements or generate new body images unless the user asks.
+2. Batch copy and rename images into `assets/images/` in one shell command. Inspect dimensions in one `file` or `sips -g pixelWidth -g pixelHeight` call instead of opening every image visually.
+3. Choose a cover quickly: use an explicitly supplied cover, a supplied 16:9 image, or crop the strongest final-result image to 16:9 with `sips -c <height> <width>`. Generate a cover only when supplied images cannot make a credible cover.
+4. Put all requested images into the Markdown body in the promised order. Add one short sentence or caption around each image explaining its job; avoid long image-analysis prose.
+5. Dry-run once with `submit_wechat_draft.py` without `--submit`. If `empty_paragraph_count` and `raw_newline_count` are `0`, submit immediately; let the submit script upload and rewrite body image URLs.
+6. Write only a short `image-plan.md` after submission when useful for reuse. Do not block a simple push on a long pre-plan.
 
 Recommended command:
 

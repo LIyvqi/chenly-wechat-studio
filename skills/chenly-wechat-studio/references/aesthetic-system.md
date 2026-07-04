@@ -85,7 +85,7 @@ Container syntax:
 
 :::dialogue[一次真实对话]
 我：这个流程能自动提交吗？
-Codex：可以，但要先处理微信凭证和 IP 白名单。
+Codex：可以，但要先处理 AppSecret 和 IP 白名单。
 :::
 ```
 

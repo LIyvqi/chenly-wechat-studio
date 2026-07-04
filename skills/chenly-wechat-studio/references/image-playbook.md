@@ -27,6 +27,28 @@ Choose the source in this order:
 
 If using web images, record source URLs in `review.md` or `image-plan.md`. Avoid copyrighted full-resolution reuse when rights are unclear; prefer official press images, user-supplied assets, generated visuals, or images with clear usage terms.
 
+## Fast Lane: User-Supplied Image Sets
+
+Use this path when the user says the provided images can go directly into the body, or when they ask to push quickly.
+
+- Keep the images. Do not replace them with generated images just because they could be prettier.
+- Batch copy and rename assets once, using semantic names such as `01-prompt.png`, `02-process.png`, `03-final.png`.
+- Inspect size/type in one command. Use `file` for a quick pass; use `sips -g pixelWidth -g pixelHeight` only when crop decisions depend on exact dimensions.
+- Only visually open images when order, content, or quality is ambiguous. Screenshots and final posters that the user already described usually do not need individual inspection.
+- Build the article around the image jobs: prompt/input, process, result, proof, or closing.
+- Derive the cover from the strongest final-result image when possible. For a portrait poster, center-crop to 16:9 if the important subject survives; otherwise use the supplied best horizontal image or generate a text-free cover.
+- Avoid long image plans before the draft. A short post-submit record is enough: source images, cover choice, body order, and upload checks.
+- Submit flow should be: copy images -> write concise article -> dry-run -> submit -> record media id and checks.
+
+Common fast commands:
+
+```bash
+file assets/images/*.png
+sips -c 611 1086 assets/images/final.png --out cover.png
+python3 ~/.codex/skills/chenly-wechat-studio/scripts/submit_wechat_draft.py article.md --cover cover.png --theme auto
+python3 ~/.codex/skills/chenly-wechat-studio/scripts/submit_wechat_draft.py article.md --cover cover.png --theme auto --submit
+```
+
 ## Core Image Modes
 
 ### 1. Editorial Cover / Key Visual
@@ -200,4 +222,3 @@ External WeChat layout research distilled here:
 - 365 Editor emphasizes that typography should reduce reader pressure, improve logic tracking, and give readers rest; it recommends limited color use and mobile-friendly text sizing/spacing.
 - Product/operation design writing repeatedly stresses that images should explain, create rest, or support credibility rather than act as random decoration.
 - Editor/tool guides converge on consistency, adequate spacing, restrained style variation, and brand/color coherence.
-
